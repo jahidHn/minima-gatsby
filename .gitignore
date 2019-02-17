@@ -67,7 +67,4 @@ yarn-error.log
 .pnp.js
 # Yarn Integrity file
 .yarn-integrity
-# skip READ.md
-*.md
-README.md
-README.md*
+
