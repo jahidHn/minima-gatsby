@@ -27,8 +27,31 @@ module.exports = {
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
+    {
+      resolve: 'gatsby-plugin-manifest',
+      options: {
+        name: 'Minima Gatsby',
+        short_name: 'Jahid',
+        start_url: '/',
+        background_color: '#f1f1f1',
+        theme_color: `#fff`,
+        display: 'minimal-ui',
+        icons: [
+          {
+            src: 'src/images/gatsby-icon.png',
+            sizes: '192x192',
+            type: 'image/png',
+          },
+          {
+            src: 'src/images/gatsby-icon.png',
+            sizes: '512x512',
+            type: 'image/png',
+          },
+        ],
+      },
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.app/offline
-    // 'gatsby-plugin-offline',
+    'gatsby-plugin-offline',
   ],
 }
