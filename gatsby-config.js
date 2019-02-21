@@ -1,57 +1,94 @@
+const path = require('path')
+const config = require('./data/data')
+
+
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: config.defaultTitle,
+    description: config.defaultDescription,
+    author: config.author,
   },
   plugins: [
-    `gatsby-plugin-react-helmet`,
-    {
+    'gatsby-plugin-react-helmet',
+    // 'gatsby-plugin-styled-components',
+     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
         path: `${__dirname}/src/images`,
       },
-    },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
+    }, 
+    'gatsby-transformer-sharp',
+    'gatsby-plugin-sharp',
+    // {
+    //   resolve: 'gatsby-source-graphql',
+    //   options: {
+    //     typeName: 'GitHub',
+    //     fieldName: 'github',
+    //     url: 'https://api.github.com/graphql',
+    //     headers: {
+    //       Authorization: `bearer ${process.env.GITHUB_TOKEN}`,
+    //     },
+    //     fetchOptions: {},
+    //   },
+    // },
     {
-      resolve: `gatsby-plugin-manifest`,
+      resolve: 'gatsby-plugin-nprogress',
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
-        start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
-        display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        color: config.themeColor,
+        showSpinner: false,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-google-analytics',
+      options: {
+        trackingId: config.googleAnalyticsID,
+        head: true,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-favicon',
+      options: {
+        logo: './static/favicon/favicon-512.png',
+        injectHTML: true,
+        icons: {
+          android: true,
+          appleIcon: true,
+          appleStartup: true,
+          coast: false,
+          favicons: true,
+          firefox: true,
+          twitter: false,
+          yandex: false,
+          windows: false,
+        },
       },
     },
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        name: 'Minima Gatsby',
-        short_name: 'Jahid',
+        name: config.defaultTitle,
+        short_name: 'starter',
         start_url: '/',
-        background_color: '#f1f1f1',
-        theme_color: `#fff`,
+        background_color: config.backgroundColor,
+        theme_color: config.themeColor,
         display: 'minimal-ui',
-        icons: [
-          {
-            src: 'src/images/gatsby-icon.png',
-            sizes: '192x192',
-            type: 'image/png',
-          },
-          {
-            src: 'src/images/gatsby-icon.png',
-            sizes: '512x512',
-            type: 'image/png',
-          },
-        ],
+        icon: './static/favicon/favicon-512.png',
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.app/offline
     'gatsby-plugin-offline',
+    {
+      resolve: `gatsby-plugin-alias-imports`,
+      options: {
+        alias: {
+          Components: path.resolve(__dirname, 'src/components'),
+          // Common: path.resolve(__dirname, 'src/components/common'),
+          Static: path.resolve(__dirname, 'static/'),
+          // Theme: path.resolve(__dirname, 'src/components/theme'),
+          Data: path.resolve(__dirname, 'data/data'),
+          Images: path.resolve(__dirname, 'src/images'),
+        },
+      },
+    },
   ],
 }
